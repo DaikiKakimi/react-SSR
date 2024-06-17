@@ -6,6 +6,12 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export default {
+  resolve: {
+    extensions: [".js", ".jsx", ".json", ".tsx"],
+    alias: {
+      "@": path.resolve(__dirname, "src"),
+    },
+  },
   entry: "./server/index.js",
   target: "node",
   externals: [nodeExternals()],
@@ -16,13 +22,22 @@ export default {
   module: {
     rules: [
       {
-        test: /\.js$/,
-        exclude: /node_modules/,
+        test: /\.(js|ts|tsx)$/,
+        // type: "javascript/auto",
         use: {
           loader: "babel-loader",
+          options: {
+            presets: ["@babel/preset-env", "@babel/preset-react", "@babel/preset-typescript"],
+          },
         },
+        exclude: /node_modules/,
+      },
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader", "postcss-loader"],
       },
     ],
   },
-  mode: "production", // または必要に応じて 'development'
+
+  mode: "development",
 };

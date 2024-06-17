@@ -1,4 +1,4 @@
-function App() {
+const App: React.FC = () => {
   return (
     <div className="flex flex-col items-center justify-center h-screen">
       <div className="text-7xl font-bold">KAKIMI DAIKI</div>
@@ -24,6 +24,6 @@ function App() {
       <div className="text-7xl font-bold">KAKIMI DAIKI</div>
     </div>
   );
-}
+};
 
 export default App;
